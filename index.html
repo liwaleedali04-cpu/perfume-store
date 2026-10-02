@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>OUD & OBSIDIAN · luxury perfume</title>
+  <!-- Tailwind via CDN (v3) with custom config for luxury palette & fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+  <style>
+    /* custom font utilities & smooth scroll */
+    .font-serif-lux { font-family: 'Playfair Display', serif; }
+    .font-sans-lux { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #0B0B0B; color: #F8F5F0; }
+    /* luxury gold accent */
+    .text-gold { color: #C9A96E; }
+    .bg-gold { background-color: #C9A96E; }
+    .border-gold { border-color: #C9A96E; }
+    .hover\:bg-gold-dark:hover { background-color: #B08F4F; }
+    /* subtle transitions */
+    .card-hover { transition: transform 0.25s ease, box-shadow 0.3s ease; }
+    .card-hover:hover { transform: translateY(-6px); box-shadow: 0 25px 30px -12px rgba(0,0,0,0.8), 0 0 0 1px rgba(201,169,110,0.15); }
+  </style>
+  <!-- Tailwind config extended -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#0B0B0B',
+            cream: '#F8F5F0',
+            gold: '#C9A96E',
+            goldDark: '#B08F4F',
+            subtleGray: '#1E1E1E',
+          },
+          fontFamily: {
+            'playfair': ['"Playfair Display"', 'serif'],
+            'inter': ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="font-inter antialiased bg-obsidian text-cream selection:bg-gold selection:text-obsidian">
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="fixed top-0 w-full z-50 bg-obsidian/90 backdrop-blur-md border-b border-white/5">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex justify-between items-center">
+      <!-- Logo placeholder -->
+      <div class="font-playfair text-2xl tracking-wider text-gold border border-gold/40 px-5 py-2 rounded-full">
+        OUD&OBSIDIAN
+      </div>
+
+      <!-- Desktop menu -->
+      <div class="hidden md:flex items-center space-x-10 text-sm tracking-widest uppercase">
+        <a href="#home" class="hover:text-gold transition duration-300">Home</a>
+        <a href="#collections" class="hover:text-gold transition duration-300">Collections</a>
+        <a href="#about" class="hover:text-gold transition duration-300">About</a>
+        <a href="#contact" class="hover:text-gold transition duration-300">Contact</a>
+      </div>
+
+      <!-- Cart icon + counter -->
+      <div class="flex items-center gap-4">
+        <div class="relative cursor-pointer" id="cart-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 text-cream hover:text-gold transition">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+          </svg>
+          <span id="cart-count" class="absolute -top-2 -right-3 bg-gold text-obsidian text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </div>
+        <!-- Mobile menu button (simple, but we use responsive classes) -->
+        <div class="md:hidden">
+          <button id="mobile-menu-btn" class="text-cream focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobile-menu" class="md:hidden hidden bg-obsidian/95 backdrop-blur border-t border-white/5 py-6 px-6 flex-col space-y-5 text-center uppercase tracking-widest text-sm">
+      <a href="#home" class="hover:text-gold py-2">Home</a>
+      <a href="#collections" class="hover:text-gold py-2">Collections</a>
+      <a href="#about" class="hover:text-gold py-2">About</a>
+      <a href="#contact" class="hover:text-gold py-2">Contact</a>
+    </div>
+  </nav>
+  <!-- spacer for fixed nav -->
+  <div class="h-24"></div>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section id="home" class="relative min-h-[90vh] flex items-center justify-center px-6">
+    <!-- subtle background texture / dark luxury gradient -->
+    <div class="absolute inset-0 bg-gradient-to-br from-obsidian via-obsidian to-[#1A1510] opacity-90"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(201,169,110,0.08)_0%,transparent_70%)]"></div>
+    
+    <div class="relative z-10 max-w-4xl mx-auto text-center">
+      <h1 class="font-playfair text-5xl md:text-7xl lg:text-8xl leading-[1.15] text-cream">
+        Scents That <br class="hidden sm:block"> Define You
+      </h1>
+      <p class="mt-8 text-base md:text-lg text-cream/70 max-w-2xl mx-auto font-light tracking-wide">
+        Rare oud, sun-kissed amber, and nocturnal flowers — composed in Grasse, bottled in black glass.
+      </p>
+      <div class="mt-12">
+        <a href="#collections" class="inline-block bg-gold text-obsidian font-medium px-10 py-4 rounded-full text-sm uppercase tracking-[0.2em] hover:bg-goldDark transition duration-300 shadow-xl shadow-gold/10">
+          Explore Collection
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FEATURED PRODUCTS ==================== -->
+  <section id="collections" class="py-24 px-6 max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <span class="text-gold text-sm tracking-[0.3em] uppercase">Signature</span>
+      <h2 class="font-playfair text-4xl md:text-5xl mt-3 text-cream">Featured Perfumes</h2>
+      <div class="w-20 h-px bg-gold/50 mx-auto mt-6"></div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 lg:gap-10">
+      <!-- Product 1 -->
+      <div class="bg-subtleGray/60 rounded-3xl overflow-hidden card-hover border border-white/5 flex flex-col">
+        <!-- placeholder image: using a solid gradient with a "perfume" emoji or abstract shape -->
+        <div class="h-72 w-full bg-gradient-to-br from-[#2A241C] to-[#0F0E0C] flex items-center justify-center relative">
+          <span class="text-7xl opacity-30">🌑</span>
+          <span class="absolute bottom-4 right-4 text-xs tracking-widest text-gold/60 border border-gold/30 px-3 py-1 rounded-full">EAU DE PARFUM</span>
+        </div>
+        <div class="p-7 flex-1 flex flex-col">
+          <h3 class="font-playfair text-2xl text-cream">Noir Oud</h3>
+          <p class="text-cream/50 text-sm mt-2">Notes of Vanilla & Oud</p>
+          <div class="flex justify-between items-center mt-6">
+            <span class="text-gold text-xl font-medium">$185</span>
+            <button class="add-to-cart bg-transparent border border-gold text-gold px-5 py-2 rounded-full text-xs uppercase tracking-wider hover:bg-gold hover:text-obsidian transition duration-300" data-name="Noir Oud">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="bg-subtleGray/60 rounded-3xl overflow-hidden card-hover border border-white/5 flex flex-col">
+        <div class="h-72 w-full bg-gradient-to-br from-[#2A241C] to-[#0F0E0C] flex items-center justify-center relative">
+          <span class="text-7xl opacity-30">🌹</span>
+          <span class="absolute bottom-4 right-4 text-xs tracking-widest text-gold/60 border border-gold/30 px-3 py-1 rounded-full">EXTRAIT</span>
+        </div>
+        <div class="p-7 flex-1 flex flex-col">
+          <h3 class="font-playfair text-2xl text-cream">Velvet Rose</h3>
+          <p class="text-cream/50 text-sm mt-2">Damascus Rose & Black Pepper</p>
+          <div class="flex justify-between items-center mt-6">
+            <span class="text-gold text-xl font-medium">$210</span>
+            <button class="add-to-cart bg-transparent border border-gold text-gold px-5 py-2 rounded-full text-xs uppercase tracking-wider hover:bg-gold hover:text-obsidian transition duration-300" data-name="Velvet Rose">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="bg-subtleGray/60 rounded-3xl overflow-hidden card-hover border border-white/5 flex flex-col">
+        <div class="h-72 w-full bg-gradient-to-br from-[#2A241C] to-[#0F0E0C] flex items-center justify-center relative">
+          <span class="text-7xl opacity-30">🌊</span>
+          <span class="absolute bottom-4 right-4 text-xs tracking-widest text-gold/60 border border-gold/30 px-3 py-1 rounded-full">COLOGNE</span>
+        </div>
+        <div class="p-7 flex-1 flex flex-col">
+          <h3 class="font-playfair text-2xl text-cream">Mystic Amber</h3>
+          <p class="text-cream/50 text-sm mt-2">Amber, Leather & Smoked Cedar</p>
+          <div class="flex justify-between items-center mt-6">
+            <span class="text-gold text-xl font-medium">$195</span>
+            <button class="add-to-cart bg-transparent border border-gold text-gold px-5 py-2 rounded-full text-xs uppercase tracking-wider hover:bg-gold hover:text-obsidian transition duration-300" data-name="Mystic Amber">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ABOUT THE BRAND ==================== -->
+  <section id="about" class="py-24 px-6">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-0 items-center bg-subtleGray/30 rounded-3xl overflow-hidden border border-white/5">
+      <!-- image placeholder left -->
+      <div class="h-96 md:h-full min-h-[400px] bg-gradient-to-br from-[#1E1A14] to-[#0B0B0B] flex items-center justify-center relative">
+        <span class="text-8xl opacity-20">🌿</span>
+        <span class="absolute bottom-6 left-6 text-xs tracking-widest text-gold/60 border border-gold/30 px-3 py-1 rounded-full">SUSTAINABLE</span>
+      </div>
+      <!-- text right -->
+      <div class="p-10 md:p-16 flex flex-col justify-center">
+        <span class="text-gold text-sm tracking-[0.3em] uppercase">Our Ethos</span>
+        <h2 class="font-playfair text-4xl md:text-5xl mt-4 text-cream leading-tight">Rare. Ethical. <br> Timeless.</h2>
+        <p class="mt-6 text-cream/60 leading-relaxed font-light">
+          We source only the finest oud from sustainable plantations, wild-harvested rose absolute, and cold-pressed citrus. Every bottle is a commitment to the planet — no compromises, no synthetics that mimic nature.
+        </p>
+        <p class="mt-4 text-cream/50 text-sm italic">
+          "Luxury should not cost the earth. It should honor it."
+        </p>
+        <div class="mt-8">
+          <a href="#" class="text-gold border-b border-gold/40 pb-1 text-sm tracking-widest uppercase hover:border-gold transition">Discover our journey →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TESTIMONIALS ==================== -->
+  <section class="py-24 px-6 bg-obsidian">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <span class="text-gold text-sm tracking-[0.3em] uppercase">Whispers</span>
+        <h2 class="font-playfair text-4xl md:text-5xl mt-3 text-cream">From Our Patrons</h2>
+        <div class="w-20 h-px bg-gold/50 mx-auto mt-6"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- testimonial 1 -->
+        <div class="bg-subtleGray/40 p-8 rounded-3xl border border-white/5 flex flex-col">
+          <div class="text-gold text-3xl font-playfair leading-none">“</div>
+          <p class="text-cream/80 italic mt-4 leading-relaxed">Noir Oud is my signature now. It's smoky, sweet, and lasts for days on fabric. I've never received so many compliments.</p>
+          <div class="mt-6 text-sm">
+            <span class="text-gold font-medium">— Isabelle M.</span>
+            <span class="text-cream/40 block text-xs mt-1">Paris</span>
+          </div>
+        </div>
+        <!-- testimonial 2 -->
+        <div class="bg-subtleGray/40 p-8 rounded-3xl border border-white/5 flex flex-col">
+          <div class="text-gold text-3xl font-playfair leading-none">“</div>
+          <p class="text-cream/80 italic mt-4 leading-relaxed">Mystic Amber feels like a warm embrace. The cedar and leather are perfectly balanced. Pure elegance.</p>
+          <div class="mt-6 text-sm">
+            <span class="text-gold font-medium">— James K.</span>
+            <span class="text-cream/40 block text-xs mt-1">New York</span>
+          </div>
+        </div>
+        <!-- testimonial 3 -->
+        <div class="bg-subtleGray/40 p-8 rounded-3xl border border-white/5 flex flex-col">
+          <div class="text-gold text-3xl font-playfair leading-none">“</div>
+          <p class="text-cream/80 italic mt-4 leading-relaxed">I appreciate the sustainable sourcing. Velvet Rose is a masterpiece — rich, spicy, and never overpowering.</p>
+          <div class="mt-6 text-sm">
+            <span class="text-gold font-medium">— Amara O.</span>
+            <span class="text-cream/40 block text-xs mt-1">London</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER & CONTACT ==================== -->
+  <footer id="contact" class="border-t border-white/5 pt-16 pb-10 px-6">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+      <!-- brand & social -->
+      <div>
+        <div class="font-playfair text-2xl tracking-wider text-gold">OUD&OBSIDIAN</div>
+        <p class="text-cream/40 text-sm mt-4 max-w-xs">Crafting rare olfactory memories since 2012. Based in Grasse, France.</p>
+        <div class="flex space-x-5 mt-6">
+          <a href="#" class="text-cream/60 hover:text-gold transition text-lg">𝕏</a>
+          <a href="#" class="text-cream/60 hover:text-gold transition text-lg">ⓕ</a>
+          <a href="#" class="text-cream/60 hover:text-gold transition text-lg">ⓘ</a>
+          <a href="#" class="text-cream/60 hover:text-gold transition text-lg">ⓟ</a>
+        </div>
+      </div>
+      <!-- newsletter -->
+      <div class="md:col-span-2 md:pl-12">
+        <h4 class="text-sm tracking-[0.25em] uppercase text-cream/80">Join the inner circle</h4>
+        <p class="text-cream/40 text-sm mt-2">Receive private launches & olfactory stories.</p>
+        <form id="subscribe-form" class="mt-6 flex flex-col sm:flex-row gap-4 max-w-lg">
+          <input type="email" placeholder="Your email address" class="flex-1 bg-transparent border border-white/20 rounded-full px-6 py-3 text-sm text-cream placeholder:text-cream/30 focus:outline-none focus:border-gold transition">
+          <button type="submit" class="bg-gold text-obsidian px-8 py-3 rounded-full text-xs uppercase tracking-widest font-medium hover:bg-goldDark transition">Subscribe</button>
+        </form>
+        <p id="subscribe-msg" class="text-gold text-xs mt-3 h-4"></p>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-14 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between text-xs text-cream/30 tracking-wider">
+      <span>© 2025 OUD & OBSIDIAN — ALL RIGHTS RESERVED.</span>
+      <span class="mt-2 md:mt-0">CRAFTED WITH INTENTION</span>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    (function() {
+      // ---------- CART COUNTER ----------
+      let cartCount = 0;
+      const cartCountElement = document.getElementById('cart-count');
+      const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+      // update counter display
+      function updateCartDisplay() {
+        cartCountElement.textContent = cartCount;
+      }
+
+      // add to cart handler
+      addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          cartCount += 1;
+          updateCartDisplay();
+
+          // subtle button feedback
+          const originalText = this.textContent;
+          this.textContent = '✓ Added';
+          this.classList.add('bg-gold', 'text-obsidian');
+          this.classList.remove('bg-transparent', 'text-gold');
+          
+          setTimeout(() => {
+            this.textContent = originalText;
+            this.classList.remove('bg-gold', 'text-obsidian');
+            this.classList.add('bg-transparent', 'text-gold');
+          }, 800);
+        });
+      });
+
+      // ---------- MOBILE MENU TOGGLE ----------
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (mobileMenuBtn && mobileMenu) {
+        mobileMenuBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+          mobileMenu.classList.toggle('flex');
+        });
+      }
+
+      // close mobile menu on link click
+      document.querySelectorAll('#mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileMenu.classList.remove('flex');
+        });
+      });
+
+      // ---------- NEWSLETTER SUBSCRIPTION (demo) ----------
+      const subscribeForm = document.getElementById('subscribe-form');
+      const subscribeMsg = document.getElementById('subscribe-msg');
+      if (subscribeForm) {
+        subscribeForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const emailInput = subscribeForm.querySelector('input[type="email"]');
+          if (emailInput.value.trim() === '') {
+            subscribeMsg.textContent = 'Please enter your email.';
+            subscribeMsg.style.color = '#C9A96E';
+            return;
+          }
+          subscribeMsg.textContent = 'Thank you. You are now part of the inner circle.';
+          subscribeMsg.style.color = '#C9A96E';
+          emailInput.value = '';
+          setTimeout(() => { subscribeMsg.textContent = ''; }, 4000);
+        });
+      }
+
+      // ---------- SMOOTH SCROLL FOR NAV LINKS (native support is fine, but fallback) ----------
+      // already enabled via CSS scroll-behavior, but ensure older browsers
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === '#') return;
+          const target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+
+      // init display
+      updateCartDisplay();
+    })();
+  </script>
+</body>
+        </html>
